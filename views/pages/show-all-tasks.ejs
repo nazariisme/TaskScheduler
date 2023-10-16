@@ -1,0 +1,47 @@
+<%- include("./../partials/header.ejs") %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="search-form">
+    <form method="post">
+        <div class="search-parameter">
+            <select name="searchParameter">
+                <option>DESCRIPTION</option>
+                <option>CATEGORY</option>
+                <option>STARTING TIME</option>
+                <option>DEADLINE</option>
+                <option>ACTUAL DURATION</option>
+                <option>ESTIMATED DURATION</option>
+                <option>ELAPSED TIME</option>
+                <option>TASK STATUS</option>
+            </select>
+            <input type="text" name="searchParameter" placeholder="If the search parameter is a date, pleas enter in this format YYYY-MM-DD"  autofocus required ></input>
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+</div>
+<table>
+    <th>DESCRIPTION</th>
+    <th>STARTING TIME</th>
+    <th>DEADLINE</th>
+    <th>CATEGORY</th>
+    <th>ESTIMATED DURATION</th>
+    <th>ELPASED TIME</th>
+    <th>ACTUAL DURATION</th>
+    <th>STATUS</th>
+    <th>ACTION</th>
+    
+    <% for (const task of all_tasks) {%>
+        <tr>
+            <td><%= task.taskDescription %></td>
+            <td><%= task.startingTime %></td>
+            <td><%= task.deadline %></td>
+            <td><%= task.category %></td>
+            <td><%= task.estimatedDuration %></td>
+            <td><%= task.elapsedTime %></td>
+            <td><%= task.actualDuration %></td>
+            <td><%= task.taskStatus %></td>
+            <td><a href="/task-scheduler/show-a-task/<%=task.id%>">Update</a> | 
+                <a href="/task-scheduler/remove-task-by-id/<%=task.id%>">Remove</a></td>
+        </tr>    
+    <% } %>
+</table>
+<%- include("./../partials/footer.ejs") %>

@@ -1,0 +1,20 @@
+<%- include("./../partials/header.ejs") %>
+<div class="search-form">
+    <form method="post">
+        <div class="search-parameter">
+            <input type="text" name="category1" placeholder="Add Category"  autofocus required ></input>
+        </div>
+    </form>
+</div>
+<table id="listCategory">
+    <th>CATEGORY NAME</th>
+    <th>ACTION</th>
+    <% for (const category of categories) {%>
+        <tr>
+            <td><%= category.categoryName %></td>
+            <td><a href="/task-scheduler/setup/update/<%=category.id%>">Update</a> | 
+                <a href="/task-scheduler/setup/delete/<%=category.id%>">Remove</a></td>
+        </tr>    
+    <% } %>
+</table>
+<%- include("./../partials/footer.ejs") %>

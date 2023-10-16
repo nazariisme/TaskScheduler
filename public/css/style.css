@@ -1,0 +1,369 @@
+body {
+    background-color:  rgb(236, 240, 241);
+    }
+
+
+#listCategory {
+  margin-top: 20px;
+  margin-bottom: auto;
+}
+#add-category {
+  margin-top: 140px;
+}
+#setup {
+  font-family:'Courier New', Courier, monospace;
+  font-size:xx-large;
+  text-align: center;
+  margin-top: -69px;
+  margin-bottom: 0px;
+}
+
+#updateTask {
+  font-family:'Courier New', Courier, monospace;
+  font-size:xx-large;
+  text-align: center;
+  margin-top: 60px;
+  position:center;
+  margin-bottom: 0px;
+}
+
+.form {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  text-align:center;
+  margin-top: 25px;
+}
+
+
+#add-button {
+  text-align:center;
+  background-color: #333;
+  color: white;
+  padding: 10px 18px;
+  border:none;
+  margin-top: 30px;
+  text-decoration: none;
+  font-size: 22px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.task-info{
+  font-size: 30px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+#discription {
+  font-family:sans-serif;
+  font-weight: normal;
+  font-family: sans-serif;
+}
+
+.change-status{
+  margin-top: -15px;
+  font-size: 20px;
+}
+
+#status-in-progress{
+  color:blue;
+}
+
+#status-complete{
+  color:green;
+}
+
+#search-form {
+  font-family:'Courier New', Courier, monospace;
+  font-size:xx-large;
+  text-align: center;
+  margin-top: -69px;
+  margin-bottom: 0px;
+}
+
+.search-form {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  text-align:center;
+  margin-top: -20px;
+}
+
+#search-button {
+  text-align:center;
+  background-color: #333;
+  color: white;
+  padding: 5px 18px;
+  border:none;
+  margin-top: 28px;
+  text-decoration: none;
+  font-size: 22px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.search-form  {
+  text-align:center;
+  height: 25px;
+  margin-top: 100px;
+  text-decoration: none;
+}
+
+input[type=text], input[type=date], input[type=number], select
+{
+  border: 1px solid #ddd;
+}
+select {
+  background-color:white;
+
+}
+.search-form select {
+  text-align:center;
+  height: 25px;
+  text-decoration: none;
+}
+.search-for-a-task-result {
+  margin-top:0.4cm;
+}
+.header {
+  text-align:center;
+  background-color: #333;
+  color: white;
+  padding: 5px 18px;
+  border:none;
+  text-decoration: none;
+  font-size: 22px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Style the search field */
+.search-form input[type=text] {
+  padding: 5px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: center;
+  width: 50%;
+  height: 15%;
+  background: #f1f1f1;
+}
+.search-form input[type=number] {
+  padding: 5px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: center;
+  width: 50%;
+  height: 15%;
+  background: #f1f1f1;
+}
+.search-parameter select {
+  padding: 5.2px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 20%;
+  height: 15%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+.search-form button {
+  float: right;
+  width: 20%;
+  height: 15%;
+  padding: 6px;
+  background: #333;
+  color: white;
+  font-size: 17px;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  opacity: 0.3;
+}
+
+/* Clear floats */
+.search-form::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.search-form {
+  margin-top: 5px;
+}
+
+.time-line{
+  width: 100%;
+  height: 0;
+  padding-bottom: 51.5%;
+  border: 1px solid black;
+  margin-top: 10px;
+}
+
+
+
+.time-line p {
+  margin-left: 5px;
+}
+
+#pDeadline {
+  margin-left: 1cm;
+}
+label {
+  text-align:center;
+  color: #333;
+  padding: 5px 18px;
+  border:none;
+  margin-top: 28px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+table td, table th {
+    position: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #50625b;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 23px;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+a {
+  text-decoration: none;
+  color:#333;
+}
+
+#timelineTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  overflow:hidden;
+  table-layout:fixed;
+  white-space: nowrap;
+}
+#timelineTable td {
+  position: left;
+  border: 0px solid rgb(154, 154, 132, .0);
+  padding: 0px;
+  margin-left: 2cm;
+}
+
+#timelineTable th {
+  border: 2px solid white;
+}
+
+#timelineTable tr:nth-child(even){background-color: rgb(154, 154, 132, .0);}
+
+#timelineTable tr:hover {background-color: #ddd;}
+
+#timelineTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #50625b;
+}
+
+#timelineTable td a {
+  display:block;
+  width:100%;
+}
+
+td p {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: left;
+  color:#f1f1f1;
+  font-size: 25px;
+}
+
+#timelineTable p {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: left;
+  color:#f1f1f1;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+}
+.week-selector {
+  margin-top: -48px;
+  margin-bottom: 50px;
+  margin-right: 20px;
+}
+.week-selector a {
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  
+}
+
+.week-selector a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  float: right;
+  background-color: #f1f1f1;
+  color: black;
+}
+
+#weekNumber, #weekNumber a {
+  color: white;
+  float: right;
+  margin-top: -5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 7.5px 8px;
+}
+
+#weekNumber a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#month-week-switch {
+  float: right;
+  background-color: #f1f1f1;
+  color: black;
+  margin-right: 5px;
+}
+
+#hasCapacity {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  color:red;
+  font-size: 20px;
+}

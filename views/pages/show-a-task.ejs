@@ -1,0 +1,36 @@
+<%- include("./../partials/header.ejs") %>
+    <div id="add-category">
+        <% for (const info of taskInfo) { %>
+        <h2 id="updateTask">Update Task <%= info.taskDescription %></h2>
+            <div class="form" name="add-task">
+                    <form method="post">
+                        <div id="category">
+                            <label>Status</label>
+                            <select name="status" required>
+                                <% if (info.taskStatus  == "Open") { %>
+                                <option><%= info.taskStatus %></option>
+                                <option>In Progress</option>
+                                <option>Completed</option>
+                                <% } %> 
+                                <% if (info.taskStatus  == "In Progress") { %>
+                                    <option><%= info.taskStatus %></option>
+                                    <option>Open</option>
+                                    <option>Completed</option>
+                                <% } %>
+                                <% if (info.taskStatus  == "Completed") { %>
+                                    <option><%= info.taskStatus %></option>
+                                    <option>In Progress</option>
+                                    <option>Open</option>
+                                <% } %>
+                            </select>
+                            <label>Elapsed Time</label>
+                            <input type="number" name="elapsedTime" value="<%= info.elapsedTime %>"  min="0"></input>
+                            <a href="/task-scheduler/remove-task-by-id/<%=info.id%>">Remove</a>
+                        </div>
+                        <a><button id="add-button">Update</button></a>
+                </form>
+        <% } %>
+        </div>
+        
+    </div>
+<%- include("./../partials/footer.ejs") %>

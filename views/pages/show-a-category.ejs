@@ -1,0 +1,16 @@
+<%- include("./../partials/header.ejs") %>
+<div id="add-category">
+    <% for (const category of categories) {%>
+        <div class="form" name="add-task">
+                <form method="post">
+                    <div id="category">
+                        <label style="font-size: 30px;">Category Name</label>
+                        <br>
+                        <br>
+                        <input style="font-size: 30px;" type="text" name="categoryName" autofocus value="<%= category.categoryName %>"></input>
+                    </div>
+            </form>
+    <% } %>
+    </div>
+</div>
+<%- include("./../partials/footer.ejs") %>

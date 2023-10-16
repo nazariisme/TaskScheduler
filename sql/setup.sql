@@ -1,0 +1,6 @@
+--
+-- DATABASE TASK SCHEDULER 
+--
+
+DROP DATABASE IF EXISTS taskScheduler;
+CREATE DATABASE taskScheduler;

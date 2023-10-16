@@ -1,0 +1,1578 @@
+<%- include("./../partials/header.ejs") %>
+<div class="week-selector" >
+    <a href="/time-traveler/<%= weekNumber + 1 %>" class="previous">Next Week &raquo;</a>
+    <h3 id="weekNumber"><a href="/task-scheduler/">Week <%= " " + weekNumber %></a></h3>
+    <a href="/time-traveler/<%= weekNumber - 1 %>" class="previous">&laquo; Previous Week</a>
+</div>
+<div class="time-line">
+<table id="timelineTable">
+    <tr>
+        <th>Monday<br><%= daysOfTheWeek[0] %>  </th>
+        <th>Tuesday <br><%= daysOfTheWeek[1] %></th>
+        <th>Wednesday <br><%= daysOfTheWeek[2] %></th>
+        <th>Thursday <br><%= daysOfTheWeek[3] %></th>
+        <th>Friday <br><%= daysOfTheWeek[4] %></th>
+        <th>Saturday <br><%= daysOfTheWeek[5] %></th>
+        <th>Sunday <br><%= daysOfTheWeek[6] %></th>
+    </tr>
+    <% for (const task of tasks) {%> 
+        <tr>
+            <% if(!daysOfTheWeek.includes(task.startingTime) && !daysOfTheWeek.includes(task.deadline) && task.taskStatus == 'Completed' && weekNumber >= currentWeek) { %>
+                <% if((lastWeek.includes(task.startingTime) || lastWeek1.includes(task.startingTime) || lastWeek2.includes(task.startingTime) ||
+                lastWeek3.includes(task.startingTime) || lastWeek4.includes(task.startingTime) || lastWeek5.includes(task.startingTime) 
+                ||lastWeek6.includes(task.startingTime) || lastWeek7.includes(task.startingTime) || lastWeek8.includes(task.startingTime) ||
+                lastWeek9.includes(task.startingTime) || lastWeek10.includes(task.startingTime) || lastWeek11.includes(task.startingTime) 
+                ||lastWeek12.includes(task.startingTime)) && (nextWeek.includes(task.deadline) || nextWeek1.includes(task.deadline) ||
+                nextWeek2.includes(task.deadline) || nextWeek3.includes(task.deadline) || nextWeek4.includes(task.deadline) || 
+                nextWeek5.includes(task.deadline) || nextWeek6.includes(task.deadline) || nextWeek7.includes(task.deadline) || 
+                nextWeek8.includes(task.deadline)) || nextWeek9.includes(task.deadline) ||nextWeek10.includes(task.deadline) || 
+                nextWeek11.includes(task.deadline) || nextWeek12.includes(task.deadline)) { %>
+                    <td colspan="7">
+                        <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                            <p style="margin-left: -1%; background-color: green; padding-left: 15px;">
+                                <%= task.taskDescription %>
+                            </p>
+                        </a>                        
+                    </td>
+                <% } %>
+            <% } else if(!daysOfTheWeek.includes(task.startingTime) && !daysOfTheWeek.includes(task.deadline) && task.taskStatus == 'In Progress' && weekNumber >= currentWeek) { %>
+                <% if((lastWeek.includes(task.startingTime) || lastWeek1.includes(task.startingTime) || lastWeek2.includes(task.startingTime) ||
+                lastWeek3.includes(task.startingTime) || lastWeek4.includes(task.startingTime) || lastWeek5.includes(task.startingTime) 
+                ||lastWeek6.includes(task.startingTime) || lastWeek7.includes(task.startingTime) || lastWeek8.includes(task.startingTime) ||
+                lastWeek9.includes(task.startingTime) || lastWeek10.includes(task.startingTime) || lastWeek11.includes(task.startingTime) 
+                ||lastWeek12.includes(task.startingTime)) && (nextWeek.includes(task.deadline) || nextWeek1.includes(task.deadline) ||
+                nextWeek2.includes(task.deadline) || nextWeek3.includes(task.deadline) || nextWeek4.includes(task.deadline) || 
+                nextWeek5.includes(task.deadline) || nextWeek6.includes(task.deadline) || nextWeek7.includes(task.deadline) || 
+                nextWeek8.includes(task.deadline)) || nextWeek9.includes(task.deadline) ||nextWeek10.includes(task.deadline) || 
+                nextWeek11.includes(task.deadline) || nextWeek12.includes(task.deadline)){ %>
+                    <td colspan="7">
+                        <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                            <p style="margin-left: -1%; background-color: rgb(84, 91, 226); padding-left: 15px;">
+                                <%= task.taskDescription %>
+                            </p>
+                        </a>
+                    </td>
+                <% } %>
+            <% } else if(!daysOfTheWeek.includes(task.startingTime) && !daysOfTheWeek.includes(task.deadline) && task.taskStatus == 'Open' && weekNumber >= currentWeek) { %>
+                <% if((lastWeek.includes(task.startingTime) || lastWeek1.includes(task.startingTime) || lastWeek2.includes(task.startingTime) ||
+                lastWeek3.includes(task.startingTime) || lastWeek4.includes(task.startingTime) || lastWeek5.includes(task.startingTime) 
+                ||lastWeek6.includes(task.startingTime) || lastWeek7.includes(task.startingTime) || lastWeek8.includes(task.startingTime) ||
+                lastWeek9.includes(task.startingTime) || lastWeek10.includes(task.startingTime) || lastWeek11.includes(task.startingTime) 
+                ||lastWeek12.includes(task.startingTime)) && (nextWeek.includes(task.deadline) || nextWeek1.includes(task.deadline) ||
+                nextWeek2.includes(task.deadline) || nextWeek3.includes(task.deadline) || nextWeek4.includes(task.deadline) || 
+                nextWeek5.includes(task.deadline) || nextWeek6.includes(task.deadline) || nextWeek7.includes(task.deadline) || 
+                nextWeek8.includes(task.deadline)) || nextWeek9.includes(task.deadline) ||nextWeek10.includes(task.deadline) || 
+                nextWeek11.includes(task.deadline) || nextWeek12.includes(task.deadline)){ %>
+                    <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray; padding-left: 15px;">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                    </td>
+                <% } %>
+            <% } else if (task.taskStatus == 'Completed') { %>
+                <% switch (task.startingTime) {
+                    case daysOfTheWeek[0]: %>
+                        <% switch (task.deadline) {
+                            case daysOfTheWeek[0]: %>
+                            <td>
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green;">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>                        
+                                </td>
+                        <% break;
+                            case daysOfTheWeek[1]: %>
+                            <td colspan="2">
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green; ">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>
+                            </td>
+                        <% break;
+                            case daysOfTheWeek[2]: %>
+                            <td colspan="3">
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green; ">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>
+                            </td>
+                        <% break;
+                            case daysOfTheWeek[3]: %>
+                            <td colspan="4">
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green; ">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>
+                            </td>
+                        <% break;
+                            case daysOfTheWeek[4]: %>
+                            <td colspan="5">
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green; ">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>
+                            </td>
+                        <% break;
+                            case daysOfTheWeek[5]: %>
+                            <td colspan="6">
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green; ">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>
+                            </td>
+                        <% break;
+                            case daysOfTheWeek[6]: %>
+                            <td colspan="7">
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green; ">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>
+                            </td>
+                        <% break;
+                            default: %>
+                            <td colspan="7">
+                                <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                    <p style="margin-left: 0%; background-color: green; ">
+                                        <%= task.taskDescription %>
+                                    </p>
+                                </a>
+                            </td>
+                    <%break; 
+                    } %>
+                <% break;
+                    case daysOfTheWeek[1]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[1]: %>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                        <td></td>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[2]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[2]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td colspan="5">
+                            
+                        <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                            <p style="margin-left: 0%; background-color: green; ">
+                                <%= task.taskDescription %>
+                            </p>
+                        </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[3]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                            
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[4]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                    
+                <% break;
+                    case daysOfTheWeek[5]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[6]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="10">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    default: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[0]: %>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: green;">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>                        
+                            </td>
+                    <% break;
+                        case daysOfTheWeek[1]: %>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: green; ">
+                                    <%= task.taskDescription %>
+                                    
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                    <%break; 
+                    } %>
+                <%break; 
+                    } %>
+                    
+
+
+
+
+            <% } else if (task.taskStatus == 'In Progress') { %>
+                <% switch (task.startingTime) {
+                    case daysOfTheWeek[0]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[0]: %>
+                        <td>
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226);">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>                        
+                            </td>
+                    <% break;
+                        case daysOfTheWeek[1]: %>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                        <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                    } %>
+                <% break;
+                    case daysOfTheWeek[1]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[1]: %>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                        <td></td>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[2]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[2]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[3]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                            
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[4]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                    
+                <% break;
+                    case daysOfTheWeek[5]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[6]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="10">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    default: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[0]: %>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: rgb(84, 91, 226);">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>                        
+                            </td>
+                    <% break;
+                        case daysOfTheWeek[1]: %>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: rgb(84, 91, 226); ">
+                                    <%= task.taskDescription %>
+                                    
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                    <%break; 
+                    } %>
+                <%break; 
+                    } %>
+                    
+
+
+
+            <% } else { %>
+
+                <% switch (task.startingTime) {
+                    case daysOfTheWeek[0]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[0]: %>
+                        <td>
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray;">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>                        
+                            </td>
+                    <% break;
+                        case daysOfTheWeek[1]: %>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                    
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                        <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                    } %>
+                <% break;
+                    case daysOfTheWeek[1]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[1]: %>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                        <td></td>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[2]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[2]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[3]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[3]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                            
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[4]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[4]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                    
+                <% break;
+                    case daysOfTheWeek[5]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[5]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    case daysOfTheWeek[6]: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[6]: %>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="10">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                       <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: 0%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <%break; 
+                        } %>
+                <% break;
+                    default: %>
+                    <% switch (task.deadline) {
+                        case daysOfTheWeek[0]: %>
+                        <td colspan="1">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray;">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>                        
+                            </td>
+                    <% break;
+                        case daysOfTheWeek[1]: %>
+                        <td colspan="2">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[2]: %>
+                        <td colspan="3">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[3]: %>
+                        <td colspan="4">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[4]: %>
+                        <td colspan="5">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[5]: %>
+                        <td colspan="6">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        case daysOfTheWeek[6]: %>
+                        <td colspan="7">
+                            <a href="/task-scheduler/show-a-task/<%=task.id%>">
+                                <p style="margin-left: -1%; background-color: gray; ">
+                                    <%= task.taskDescription %>
+                                    
+                                </p>
+                            </a>
+                        </td>
+                    <% break;
+                        default: %>
+                    <%break; 
+                    } %>
+                <%break; 
+                    } %>
+    
+            <% } %>
+        </tr>
+    <% } %>
+</table>
+</div>
+<%- include("./../partials/footer.ejs") %>

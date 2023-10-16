@@ -1,0 +1,57 @@
+<%- include("./../partials/header.ejs") %>
+    <div id="add-category">
+        <h2 id="setup">Insert Task Details</h2>
+        <div class="form" name="add-task">
+            <form method="post">
+                <div id="category">
+                    <label>Starting Time</label> 
+                    <input type="text" onfocus="(this.type='date')" placeholder="YYYY-MM-DD"name="startingTime" id="from"  required min="min" onchange="myFunction()"></input>
+                    <label>Deadline</label>
+                    <input type="text" onfocus="(this.type='date')" placeholder="YYYY-MM-DD" name="deadline" id="to" min="min" required></input>
+                    <label>Category</label>
+                    <select name="category" required>
+                            <% for (const category of categories) {%>
+                                <option><%= category.categoryName %></option>
+                            <% } %>
+                    </select>
+                    <label>Status</label>
+                    <select name="status" required>
+                        <option>Open</option>
+                        <option>In Progress</option>
+                    </select>
+                    <label>Estimated Duration</label>
+                    <input type="number" name="estimatedDuration" placeholder="Hours" required min="0"></input>
+                    <br>
+                    <br>
+                    <label>Description</label>
+                    <br>
+                    <textarea name="description" cols="30" rows="4" placeholder="Task Name/Description" required></textarea> 
+                </div>
+                <a><button id="add-button">ADD</button></a>
+            </form>
+        </div>
+        <% if (!hasCapacity) { %>
+            <p id="hasCapacity">No Capacity for the choosen starting time and deadline.</p>
+            <p id="hasCapacity">Please move the them at least one day forward.</p>
+        <% } %>
+    </div>
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("from").setAttribute("min", today);
+    
+        function myFunction() {
+            var x = document.getElementById("from").value;
+            document.getElementById("to").setAttribute("min", x);
+        }
+    </script>
+<%- include("./../partials/footer.ejs") %>

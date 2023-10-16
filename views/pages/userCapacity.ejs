@@ -1,0 +1,15 @@
+<%- include("./../partials/header.ejs") %>
+<div class="search-form">
+    <form method="post">
+        <div class="search-parameter">
+            <input type="number" name="userCapacity" placeholder="Update User Capacity" min="0"  autofocus required ></input>
+        </div>
+    </form>
+</div>
+<table id="listCategory">
+    <th>CURRENT CAPACITY</th>
+    <tr>
+        <td><%= capacity %></td>
+    </tr>    
+</table>
+<%- include("./../partials/footer.ejs") %>
